@@ -3,534 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bütçe Kontrol | Pars Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Denge | Pars Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07111f; --panel:#0d1a2b; --panel2:#101f33; --line:#1d3048;
+  --bg:#07111f; --panel:#0d1a2b; --line:#1d3048;
   --text:#eef5ff; --muted:#91a4ba; --green:#2bd576; --red:#ff6174;
-  --gold:#f4c95d; --blue:#4da3ff; --teal:#2bd6c4; --shadow:0 18px 50px rgba(0,0,0,.25);
+  --gold:#f4c95d; --blue:#4da3ff;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);
+body{
+  margin:0; font-family:Inter,system-ui,sans-serif; color:var(--text);
   background:radial-gradient(circle at 15% 0%,rgba(77,163,255,.12),transparent 32%),
-             radial-gradient(circle at 90% 10%,rgba(244,201,93,.10),transparent 28%),var(--bg);
-  min-height:100vh;-webkit-font-smoothing:antialiased}
-button,input,select,textarea{font-family:inherit}
-.wrap{width:min(1180px,calc(100% - 28px));margin:auto;padding-bottom:60px}
-header{padding:22px 0 14px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
-  background:linear-gradient(145deg,#18385a,#0c2139);font-size:22px;box-shadow:var(--shadow)}
-h1{font-size:20px;margin:0;font-weight:700}
-.sub{color:var(--muted);font-size:12px;margin-top:2px}
-.period{display:flex;gap:8px;align-items:center}
-.period select,.btn,input,select,textarea{
-  background:var(--panel2);border:1px solid var(--line);color:var(--text);
-  border-radius:10px;padding:8px 10px;font-size:13px}
-.btn{cursor:pointer;font-weight:600}
-.btn:hover{border-color:#3a5a80}
-.btn.pri{background:linear-gradient(180deg,#1a4e86,#12365f);border-color:#2a5d8f}
-.btn.ok{background:#123a28;border-color:#1e6a46;color:var(--green)}
-.btn.danger{background:#3a1520;border-color:#6a2436;color:var(--red)}
-nav{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 18px}
-nav button{background:transparent;border:1px solid transparent;color:var(--muted);padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600;font-size:13px}
-nav button.on{background:var(--panel);border-color:var(--line);color:var(--text)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
-.card{background:linear-gradient(180deg,rgba(16,31,51,.92),rgba(13,26,43,.92));border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
-.card h3{margin:0 0 6px;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.3px}
-.card .val{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums}
-.g{color:var(--green)}.r{color:var(--red)}.y{color:var(--gold)}.b{color:var(--blue)}
-.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;color:var(--muted);font-weight:600;padding:8px 6px;border-bottom:1px solid var(--line);font-size:11px}
-td{padding:8px 6px;border-bottom:1px solid rgba(29,48,72,.6);font-variant-numeric:tabular-nums}
-.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700}
-.tag.ok{background:#123a28;color:var(--green)}
-.tag.warn{background:#3a2e10;color:var(--gold)}
-.tag.bad{background:#3a1520;color:var(--red)}
-.tag.neu{background:#1a2a3d;color:var(--muted)}
-.form{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:12px}
-.form .full{grid-column:1/-1}
-label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
-input,select,textarea{width:100%}
-.bar{height:8px;background:#122033;border-radius:99px;overflow:hidden}
-.bar>i{display:block;height:100%;background:var(--blue)}
-.muted{color:var(--muted);font-size:12px}
-.row-actions{display:flex;gap:6px}
-.hidden{display:none!important}
-.lock{min-height:100vh;display:grid;place-items:center}
-.lockbox{width:min(380px,90vw);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px;text-align:center}
-.lockbox h2{margin:8px 0 6px}
-.score{font-size:42px;font-weight:800}
-footer{margin-top:28px;color:var(--muted);font-size:12px;text-align:center}
-@media(max-width:900px){
-  .kpis,.grid2,.grid3,.form{grid-template-columns:1fr 1fr}
+             radial-gradient(circle at 90% 8%,rgba(244,201,93,.08),transparent 28%),var(--bg);
+  min-height:100vh;
 }
+.wrap{width:min(720px,calc(100% - 28px)); margin:auto; padding:28px 0 60px}
+header{display:flex; justify-content:space-between; align-items:center; margin-bottom:22px}
+.brand{display:flex; gap:12px; align-items:center}
+.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#18385a,#0c2139);font-size:22px}
+h1{margin:0;font-size:18px}
+.sub{color:var(--muted);font-size:12px;margin-top:2px}
+.hero{text-align:center; padding:28px 16px 22px; border:1px solid var(--line);
+  border-radius:20px; background:linear-gradient(180deg,#102033,#0d1a2b)}
+.hero span{color:var(--muted); font-size:12px; letter-spacing:.4px; font-weight:600}
+.hero strong{display:block; font-size:clamp(36px,8vw,56px); font-weight:800; margin:6px 0;
+  font-variant-numeric:tabular-nums}
+.hero p{margin:0; color:var(--muted); font-size:13px}
+.kpis{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:14px 0 18px}
+.kpi{border:1px solid var(--line); border-radius:14px; padding:12px; background:#0d1a2b}
+.kpi b{display:block; font-size:11px; color:var(--muted); font-weight:600}
+.kpi i{display:block; font-style:normal; font-size:18px; font-weight:800; margin-top:4px;
+  font-variant-numeric:tabular-nums}
+form{display:grid; grid-template-columns:1fr 1fr 1.4fr auto; gap:8px; margin-bottom:16px}
+input,select,button{
+  background:#101f33; border:1px solid var(--line); color:var(--text);
+  border-radius:12px; padding:11px 12px; font-size:14px; font-family:inherit
+}
+button{cursor:pointer; font-weight:700}
+.ok{background:#123a28; border-color:#1e6a46; color:var(--green)}
+.ghost{color:var(--muted)}
+ul{list-style:none; padding:0; margin:0}
+li{display:flex; justify-content:space-between; gap:10px; align-items:center;
+  border-bottom:1px solid rgba(29,48,72,.7); padding:10px 2px; font-size:14px}
+li small{display:block; color:var(--muted); font-size:11px}
+.amt{font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
+.x{background:transparent; border:0; color:var(--muted); cursor:pointer; font-size:16px}
+.tools{display:flex; gap:8px; justify-content:flex-end; margin-top:18px}
+.hidden{display:none}
 @media(max-width:640px){
-  .kpis,.grid2,.grid3,.form{grid-template-columns:1fr}
-  h1{font-size:16px}
+  form{grid-template-columns:1fr 1fr}
+  form button{grid-column:1/-1}
+  .kpis{grid-template-columns:1fr 1fr}
+  .kpis .kpi:last-child{grid-column:1/-1}
 }
 </style>
 </head>
 <body>
-<div id="lock" class="lock hidden">
-  <div class="lockbox">
-    <div class="logo" style="margin:auto">₺</div>
-    <h2>Bütçe kilitli</h2>
-    <p class="muted">PIN girin. Veriler yalnızca bu tarayıcıda durur.</p>
-    <input id="pinIn" type="password" inputmode="numeric" placeholder="PIN" style="margin:12px 0">
-    <button class="btn pri" style="width:100%" onclick="unlock()">Aç</button>
-    <p id="pinErr" class="r muted"></p>
-  </div>
-</div>
-
-<div id="app" class="wrap">
+<div class="wrap">
   <header>
     <div class="brand">
       <div class="logo">₺</div>
       <div>
-        <h1>BÜTÇE KONTROL</h1>
-        <div class="sub">Sıfır taban · 50/30/20 · Pars Studio</div>
+        <h1>DENGE</h1>
+        <div class="sub">Kazanc − harcama − borc</div>
       </div>
     </div>
-    <div class="period">
-      <select id="ay"></select>
-      <select id="yil"></select>
-      <button class="btn" onclick="exportJson()">Yedekle</button>
-      <button class="btn" onclick="document.getElementById('imp').click()">Yükle</button>
-      <input id="imp" type="file" accept="application/json" class="hidden" onchange="importJson(event)">
+    <div class="tools">
+      <button class="ghost" onclick="yedekle()">Yedekle</button>
+      <button class="ghost" onclick="document.getElementById('imp').click()">Yukle</button>
+      <input id="imp" class="hidden" type="file" accept="application/json" onchange="yukle(event)">
     </div>
   </header>
-  <nav>
-    <button data-v="dash" class="on">Dashboard</button>
-    <button data-v="tx">İşlemler</button>
-    <button data-v="bud">Aylık Bütçe</button>
-    <button data-v="goal">Hedefler</button>
-    <button data-v="debt">Borçlar</button>
-    <button data-v="set">Ayarlar</button>
-  </nav>
 
-  <section id="v-dash">
-    <div class="kpis">
-      <div class="card"><h3>GELİR</h3><div class="val g" id="kGelir">0 ₺</div><div class="muted" id="kGelirAlt"></div></div>
-      <div class="card"><h3>ÇIKIŞ</h3><div class="val r" id="kCikis">0 ₺</div><div class="muted">gider + tasarruf virmanı</div></div>
-      <div class="card"><h3>NET</h3><div class="val" id="kNet">0 ₺</div><div class="muted" id="kNetAlt"></div></div>
-      <div class="card"><h3>TASARRUF ORANI</h3><div class="val y" id="kTas">%0</div><div class="muted" id="kTasAlt"></div></div>
-    </div>
-    <div class="grid2">
-      <div class="card">
-        <h3>SAĞLIK SKORU</h3>
-        <div class="score" id="kScore">100</div>
-        <p class="muted" id="kScoreMsg"></p>
-        <p class="muted">100 − 30 (negatif net) − 20 (tasarruf hedef altı) − 10 (ihtiyaç payı yüksek) − 3×aşım</p>
-      </div>
-      <div class="card">
-        <h3>50 / 30 / 20</h3>
-        <div id="dist"></div>
-      </div>
-    </div>
-    <div class="card" style="margin-top:12px">
-      <h3>MÜDAHALE — AŞIM VE DİKKAT</h3>
-      <div id="alerts"></div>
-    </div>
-  </section>
+  <div class="hero">
+    <span>ELINDE KALAN</span>
+    <strong id="denge">0 ₺</strong>
+    <p id="durum">Kazanc ve harcama gir, dengeyi gor.</p>
+  </div>
 
-  <section id="v-tx" class="hidden">
-    <div class="card">
-      <h3>YENİ İŞLEM</h3>
-      <div class="form">
-        <div><label>Tarih</label><input type="date" id="tDate"></div>
-        <div><label>Tür</label><select id="tKind"><option value="gelir">Gelir</option><option value="gider">Gider / virman</option></select></div>
-        <div><label>Kategori</label><select id="tCat"></select></div>
-        <div><label>Tutar ₺</label><input type="number" id="tAmt" min="0" step="0.01"></div>
-        <div><label>Ödeme</label><select id="tPay"><option>Banka</option><option>KK</option><option>Nakit</option><option>Havale</option></select></div>
-        <div><label>Açıklama</label><input id="tNote" placeholder="örn. Migros hafta 1"></div>
-      </div>
-      <button class="btn pri" onclick="addTx()">Kaydet</button>
-    </div>
-    <div class="card" style="margin-top:12px">
-      <h3>KAYITLAR</h3>
-      <div id="txList"></div>
-    </div>
-  </section>
+  <div class="kpis">
+    <div class="kpi"><b>KAZANC</b><i id="kKazanc">0 ₺</i></div>
+    <div class="kpi"><b>HARCAMA</b><i id="kHarcama">0 ₺</i></div>
+    <div class="kpi"><b>BORC</b><i id="kBorc">0 ₺</i></div>
+  </div>
 
-  <section id="v-bud" class="hidden">
-    <div class="card">
-      <h3>PLAN / GERÇEK / DURUM</h3>
-      <p class="muted">Plan tavanlarını Ayarlar’dan değiştirin. Gerçek işlemlerden hesaplanır.</p>
-      <div id="budTable"></div>
-    </div>
-  </section>
+  <form onsubmit="ekle(event)">
+    <select id="tur">
+      <option value="kazanc">Kazanc</option>
+      <option value="harcama">Harcama</option>
+      <option value="borc">Borc</option>
+    </select>
+    <input id="tutar" type="number" min="0" step="0.01" placeholder="Tutar" required>
+    <input id="ad" placeholder="Ne?  ornek: maas, kira, kart">
+    <button class="ok" type="submit">Ekle</button>
+  </form>
 
-  <section id="v-goal" class="hidden">
-    <div class="card">
-      <h3>YENİ HEDEF</h3>
-      <div class="form">
-        <div><label>Ad</label><input id="gAd"></div>
-        <div><label>Hedef ₺</label><input type="number" id="gHedef" min="0"></div>
-        <div><label>Biriken ₺</label><input id="gBiriken" type="number" min="0"></div>
-        <div><label>Tarih</label><input type="date" id="gTarih"></div>
-        <div class="full"><button class="btn pri" onclick="addGoal()">Hedef ekle</button></div>
-      </div>
-    </div>
-    <div class="card" style="margin-top:12px" id="goalList"></div>
-  </section>
-
-  <section id="v-debt" class="hidden">
-    <div class="card">
-      <h3>YENİ BORÇ</h3>
-      <div class="form">
-        <div><label>Ad</label><input id="dAd"></div>
-        <div><label>Tür</label><select id="dTur"><option>Kredi kartı</option><option>İhtiyaç kredisi</option><option>Konut</option><option>Diğer</option></select></div>
-        <div><label>Kalan ₺</label><input type="number" id="dKalan" min="0"></div>
-        <div><label>Yıllık faiz %</label><input type="number" id="dFaiz" min="0" step="0.1"></div>
-        <div><label>Asgari ₺</label><input type="number" id="dAsg" min="0"></div>
-        <div><label>Bu ay ödenen ₺</label><input type="number" id="dOde" min="0"></div>
-        <div class="full"><button class="btn pri" onclick="addDebt()">Borç ekle</button></div>
-      </div>
-    </div>
-    <div class="card" style="margin-top:12px" id="debtList"></div>
-  </section>
-
-  <section id="v-set" class="hidden">
-    <div class="grid2">
-      <div class="card">
-        <h3>DAĞILIM HEDEFLERİ</h3>
-        <label>İhtiyaç %</label><input type="number" id="pIht" min="0" max="100">
-        <label>İstek %</label><input type="number" id="pIst" min="0" max="100">
-        <label>Tasarruf %</label><input type="number" id="pTas" min="0" max="100">
-        <label>Uyarı eşiği %</label><input type="number" id="pUyari" min="50" max="100">
-        <p class="muted" id="pSum"></p>
-        <button class="btn pri" onclick="saveRates()">Kaydet</button>
-      </div>
-      <div class="card">
-        <h3>GÜVENLİK VE VERİ</h3>
-        <label>Yeni PIN (boş = kilit yok)</label>
-        <input id="newPin" type="password" inputmode="numeric">
-        <button class="btn" onclick="setPin()">PIN güncelle</button>
-        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
-        <button class="btn" onclick="seedSample()">Örnek veriyi yükle</button>
-        <button class="btn danger" onclick="wipe()">Tüm veriyi sil</button>
-        <p class="muted" style="margin-top:10px">GitHub Pages sunucu tutmaz. Veri bu tarayıcının localStorage alanındadır. Başka cihazda açmak için Yedekle → Yükle.</p>
-      </div>
-    </div>
-    <div class="card" style="margin-top:12px">
-      <h3>KATEGORİ PLAN TAVANLARI</h3>
-      <div id="catTable"></div>
-    </div>
-  </section>
-  <footer>Veriler cihazınızda saklanır · <a href="https://ermetasarim.github.io/projeler/" style="color:var(--blue)">Pars Studio</a></footer>
+  <ul id="liste"></ul>
+  <div class="tools">
+    <button class="ghost" onclick="temizle()">Tumunu sil</button>
+  </div>
 </div>
 
 <script>
-const KEY = "pars_butce_v1";
-const AYLAR = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
-const DEF_CATS = [
-  {kod:"G01",ad:"Maaş",tur:"Gelir",grup:"Gelir",plan:50000},
-  {kod:"G02",ad:"Ek gelir / prim",tur:"Gelir",grup:"Gelir",plan:6650},
-  {kod:"G03",ad:"Serbest / freelance",tur:"Gelir",grup:"Gelir",plan:0},
-  {kod:"I01",ad:"Kira / konut kredisi",tur:"Gider",grup:"İhtiyaç",plan:18000},
-  {kod:"I02",ad:"Aidat + site",tur:"Gider",grup:"İhtiyaç",plan:1500},
-  {kod:"I03",ad:"Elektrik",tur:"Gider",grup:"İhtiyaç",plan:1200},
-  {kod:"I04",ad:"Su",tur:"Gider",grup:"İhtiyaç",plan:250},
-  {kod:"I05",ad:"Doğalgaz",tur:"Gider",grup:"İhtiyaç",plan:800},
-  {kod:"I06",ad:"İnternet + telefon",tur:"Gider",grup:"İhtiyaç",plan:750},
-  {kod:"I07",ad:"Market / gıda",tur:"Gider",grup:"İhtiyaç",plan:8000},
-  {kod:"I08",ad:"Ulaşım + yakıt",tur:"Gider",grup:"İhtiyaç",plan:2500},
-  {kod:"I09",ad:"Sağlık + ilaç",tur:"Gider",grup:"İhtiyaç",plan:800},
-  {kod:"I11",ad:"Sigorta",tur:"Gider",grup:"İhtiyaç",plan:1200},
-  {kod:"I12",ad:"Borç asgari ödeme",tur:"Gider",grup:"İhtiyaç",plan:3000},
-  {kod:"W01",ad:"Dışarıda yeme-içme",tur:"Gider",grup:"İstek",plan:2500},
-  {kod:"W02",ad:"Giyim + bakım",tur:"Gider",grup:"İstek",plan:1500},
-  {kod:"W03",ad:"Eğlence + kültür",tur:"Gider",grup:"İstek",plan:800},
-  {kod:"W04",ad:"Abonelikler",tur:"Gider",grup:"İstek",plan:450},
-  {kod:"W05",ad:"Hobi + spor",tur:"Gider",grup:"İstek",plan:1000},
-  {kod:"W06",ad:"Tatil + seyahat",tur:"Gider",grup:"İstek",plan:1500},
-  {kod:"W07",ad:"Hediye",tur:"Gider",grup:"İstek",plan:400},
-  {kod:"W08",ad:"Diğer istek",tur:"Gider",grup:"İstek",plan:500},
-  {kod:"S01",ad:"Acil durum fonu",tur:"Tasarruf",grup:"Tasarruf",plan:4000},
-  {kod:"S02",ad:"Yatırım / BES",tur:"Tasarruf",grup:"Tasarruf",plan:3000},
-  {kod:"S03",ad:"Hedef birikim",tur:"Tasarruf",grup:"Tasarruf",plan:2000},
-  {kod:"S04",ad:"Ekstra borç anaparası",tur:"Tasarruf",grup:"Tasarruf",plan:1000}
-];
+const KEY="pars_denge_v1";
+let rows=JSON.parse(localStorage.getItem(KEY)||"[]");
+const tl=n=>(Number(n)||0).toLocaleString("tr-TR",{maximumFractionDigits:0})+" ₺";
+const save=()=>localStorage.setItem(KEY,JSON.stringify(rows));
 
-function uid(){return Math.random().toString(36).slice(2,10)}
-function tl(n){n=Number(n)||0;return n.toLocaleString("tr-TR",{minimumFractionDigits:0,maximumFractionDigits:0})+" ₺"}
-function pct(n){return "%"+((Number(n)||0)*100).toFixed(1)}
-function hash(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return String(h)}
-function load(){
-  const raw=localStorage.getItem(KEY);
-  if(raw){try{return JSON.parse(raw)}catch(e){}}
-  return blank();
-}
-function blank(){
-  const now=new Date();
-  return {
-    year:now.getFullYear(), month:now.getMonth()+1,
-    rates:{iht:50,ist:30,tas:20,uyari:90},
-    pin:null, cats:DEF_CATS.map(c=>({...c})),
-    txs:[], goals:[], debts:[]
-  };
-}
-let S=load();
-function save(){localStorage.setItem(KEY,JSON.stringify(S))}
-
-function fillSelects(){
-  const ay=document.getElementById("ay"), yil=document.getElementById("yil");
-  ay.innerHTML=AYLAR.map((a,i)=>`<option value="${i+1}" ${S.month===i+1?"selected":""}>${a}</option>`).join("");
-  yil.innerHTML="";
-  for(let y=S.year-2;y<=S.year+2;y++) yil.innerHTML+=`<option ${y===S.year?"selected":""}>${y}</option>`;
-  ay.onchange=()=>{S.month=+ay.value;save();render()};
-  yil.onchange=()=>{S.year=+yil.value;save();render()};
-  document.getElementById("tDate").value=new Date().toISOString().slice(0,10);
-  refillCats();
-}
-function refillCats(){
-  const kind=document.getElementById("tKind").value;
-  const list=S.cats.filter(c=> kind==="gelir" ? c.tur==="Gelir" : c.tur!=="Gelir");
-  document.getElementById("tCat").innerHTML=list.map(c=>`<option>${c.ad}</option>`).join("");
-}
-document.getElementById("tKind").onchange=refillCats;
-
-function monthTx(){
-  return S.txs.filter(t=>{
-    const d=new Date(t.date);
-    return d.getFullYear()===S.year && d.getMonth()+1===S.month;
+function ekle(e){
+  e.preventDefault();
+  const tutar=+document.getElementById("tutar").value;
+  if(!tutar) return;
+  rows.unshift({
+    id:Date.now().toString(36),
+    tur:document.getElementById("tur").value,
+    tutar,
+    ad:document.getElementById("ad").value.trim()||"—",
+    tarih:new Date().toLocaleDateString("tr-TR")
   });
+  document.getElementById("tutar").value="";
+  document.getElementById("ad").value="";
+  save(); ciz();
 }
-function actual(ad){
-  return monthTx().filter(t=>t.cat===ad).reduce((s,t)=>s+Number(t.amt),0);
-}
-function sums(){
-  const gelir=S.cats.filter(c=>c.tur==="Gelir").reduce((s,c)=>s+actual(c.ad),0);
-  const iht=S.cats.filter(c=>c.grup==="İhtiyaç").reduce((s,c)=>s+actual(c.ad),0);
-  const ist=S.cats.filter(c=>c.grup==="İstek").reduce((s,c)=>s+actual(c.ad),0);
-  const tas=S.cats.filter(c=>c.grup==="Tasarruf").reduce((s,c)=>s+actual(c.ad),0);
-  const cikis=iht+ist+tas;
-  return {gelir,iht,ist,tas,cikis,net:gelir-cikis};
-}
-function statusOf(c, gercek){
-  if(c.tur==="Gelir") return gercek>=c.plan?"Hedefte":"Plan altı";
-  if(c.tur==="Tasarruf"){
-    if(!c.plan) return gercek>0?"Plansız":"—";
-    return gercek>=c.plan?"Hedefte":"Plan altı";
-  }
-  if(!c.plan) return gercek>0?"Plansız":"—";
-  if(gercek>c.plan+0.009) return "Aşıldı";
-  if(gercek>=c.plan*(S.rates.uyari/100) && gercek<c.plan) return "Dikkat";
-  return "Uygun";
-}
-function tag(st){
-  const cls=st==="Aşıldı"||st==="Plansız"?"bad":st==="Dikkat"||st==="Plan altı"?"warn":st==="—"?"neu":"ok";
-  return `<span class="tag ${cls}">${st}</span>`;
-}
-
-function renderDash(){
-  const s=sums();
-  document.getElementById("kGelir").textContent=tl(s.gelir);
-  document.getElementById("kCikis").textContent=tl(s.cikis);
-  const netEl=document.getElementById("kNet");
-  netEl.textContent=tl(s.net); netEl.className="val "+(s.net>=0?"g":"r");
-  document.getElementById("kNetAlt").textContent=s.net>=0?"Pozitif tampon":"AÇIK — harcama kısın";
-  const ratio=s.gelir?s.tas/s.gelir:0;
-  document.getElementById("kTas").textContent=pct(ratio);
-  document.getElementById("kTasAlt").textContent="Hedef "+S.rates.tas+"%";
-  let score=100;
-  const asilan=S.cats.filter(c=>statusOf(c,actual(c.ad))==="Aşıldı").length;
-  if(s.net<0) score-=30;
-  if(s.gelir && ratio<S.rates.tas/100) score-=20;
-  if(s.gelir && s.iht/s.gelir>S.rates.iht/100) score-=10;
-  score=Math.max(0,score-3*asilan);
-  document.getElementById("kScore").textContent=score;
-  document.getElementById("kScore").style.color=score>=85? "var(--green)":score>=70?"var(--gold)":"var(--red)";
-  document.getElementById("kScoreMsg").textContent=
-    score>=85?"Mükemmel disiplin.":score>=70?"İyi. Aşımları gelecek ay hizalayın.":score>=50?"Orta. İstekleri iki hafta dondurun.":"Müdahale — kırmızı satırlara bakın.";
-  const rows=[
-    ["İhtiyaç",s.iht,S.rates.iht],
-    ["İstek",s.ist,S.rates.ist],
-    ["Tasarruf",s.tas,S.rates.tas]
-  ];
-  document.getElementById("dist").innerHTML=rows.map(([n,v,h])=>{
-    const p=s.gelir?v/s.gelir:0;
-    return `<div style="margin:10px 0"><div style="display:flex;justify-content:space-between"><b>${n}</b><span>${tl(v)} · ${pct(p)} / hedef %${h}</span></div>
-      <div class="bar"><i style="width:${Math.min(100,p*100)}%;background:${n==="Tasarruf"?"var(--green)":n==="İstek"?"var(--gold)":"var(--red)"}"></i></div></div>`;
-  }).join("");
-  const alerts=S.cats.map(c=>({c,st:statusOf(c,actual(c.ad)),g:actual(c.ad)}))
-    .filter(x=>["Aşıldı","Dikkat","Plansız"].includes(x.st));
-  document.getElementById("alerts").innerHTML=alerts.length?`<table><tr><th>Kategori</th><th>Plan</th><th>Gerçek</th><th></th></tr>${
-    alerts.map(x=>`<tr><td>${x.c.ad}</td><td>${tl(x.c.plan)}</td><td>${tl(x.g)}</td><td>${tag(x.st)}</td></tr>`).join("")
-  }</table>`:`<p class="muted">Bu ay aşım yok.</p>`;
-}
-
-function renderTx(){
-  const list=[...monthTx()].sort((a,b)=>b.date.localeCompare(a.date));
-  document.getElementById("txList").innerHTML=list.length?`<table><tr><th>Tarih</th><th>Tür</th><th>Kategori</th><th>Tutar</th><th>Not</th><th></th></tr>${
-    list.map(t=>`<tr><td>${t.date}</td><td>${t.kind}</td><td>${t.cat}</td><td>${tl(t.amt)}</td><td>${t.note||""}</td>
-      <td><button class="btn danger" onclick="delTx('${t.id}')">Sil</button></td></tr>`).join("")
-  }</table>`:`<p class="muted">Bu ay kayıt yok.</p>`;
-}
-function addTx(){
-  const amt=+document.getElementById("tAmt").value;
-  if(!amt){alert("Tutar girin");return}
-  S.txs.push({
-    id:uid(),
-    date:document.getElementById("tDate").value,
-    kind:document.getElementById("tKind").value,
-    cat:document.getElementById("tCat").value,
-    amt, pay:document.getElementById("tPay").value,
-    note:document.getElementById("tNote").value
-  });
-  document.getElementById("tAmt").value="";
-  document.getElementById("tNote").value="";
-  save(); render();
-}
-function delTx(id){S.txs=S.txs.filter(t=>t.id!==id);save();render()}
-
-function renderBud(){
-  const rows=S.cats.map(c=>{
-    const g=actual(c.ad), st=statusOf(c,g), use=c.plan?g/c.plan: (g?1:0);
-    return `<tr><td>${c.kod}</td><td>${c.ad}</td><td>${c.grup}</td><td>${tl(c.plan)}</td><td>${tl(g)}</td>
-      <td>${tl(c.tur==="Gelir"?g-c.plan:c.plan-g)}</td>
-      <td><div class="bar"><i style="width:${Math.min(100,use*100)}%;background:${st==="Aşıldı"?"var(--red)":"var(--blue)"}"></i></div></td>
-      <td>${tag(st)}</td></tr>`;
-  }).join("");
-  document.getElementById("budTable").innerHTML=`<table><tr><th>Kod</th><th>Kategori</th><th>Grup</th><th>Plan</th><th>Gerçek</th><th>Fark</th><th>Kullanım</th><th></th></tr>${rows}</table>`;
-}
-
-function addGoal(){
-  const ad=document.getElementById("gAd").value.trim();
-  if(!ad) return;
-  S.goals.push({id:uid(),ad,hedef:+document.getElementById("gHedef").value||0,
-    biriken:+document.getElementById("gBiriken").value||0,tarih:document.getElementById("gTarih").value});
-  save(); render();
-}
-function delGoal(id){S.goals=S.goals.filter(g=>g.id!==id);save();render()}
-function renderGoals(){
-  document.getElementById("goalList").innerHTML=S.goals.length?S.goals.map(g=>{
-    const p=g.hedef?g.biriken/g.hedef:0;
-    return `<div style="margin:12px 0"><b>${g.ad}</b> · kalan ${tl(Math.max(0,g.hedef-g.biriken))}
-      <div class="bar"><i style="width:${Math.min(100,p*100)}%;background:var(--teal)"></i></div>
-      <div class="muted">${tl(g.biriken)} / ${tl(g.hedef)} ${g.tarih?"· "+g.tarih:""}</div>
-      <button class="btn danger" onclick="delGoal('${g.id}')">Sil</button></div>`;
-  }).join(""):`<p class="muted">Hedef yok.</p>`;
-}
-
-function addDebt(){
-  const ad=document.getElementById("dAd").value.trim();
-  if(!ad) return;
-  S.debts.push({id:uid(),ad,tur:document.getElementById("dTur").value,
-    kalan:+document.getElementById("dKalan").value||0,faiz:+document.getElementById("dFaiz").value||0,
-    asg:+document.getElementById("dAsg").value||0,ode:+document.getElementById("dOde").value||0});
-  save(); render();
-}
-function delDebt(id){S.debts=S.debts.filter(d=>d.id!==id);save();render()}
-function renderDebts(){
-  document.getElementById("debtList").innerHTML=S.debts.length?`<table><tr><th>Ad</th><th>Kalan</th><th>Aylık faiz</th><th>Anapara</th><th></th></tr>${
-    S.debts.map(d=>{
-      const faiz=d.kalan*(d.faiz/100)/12;
-      const ana=Math.max(0,(d.ode||0)-faiz);
-      return `<tr><td>${d.ad}<div class="muted">${d.tur}</div></td><td>${tl(d.kalan)}</td><td class="r">${tl(faiz)}</td><td>${tl(ana)}</td>
-        <td><button class="btn danger" onclick="delDebt('${d.id}')">Sil</button></td></tr>`;
-    }).join("")
-  }</table>`:`<p class="muted">Borç yok.</p>`;
-}
-
-function renderSet(){
-  document.getElementById("pIht").value=S.rates.iht;
-  document.getElementById("pIst").value=S.rates.ist;
-  document.getElementById("pTas").value=S.rates.tas;
-  document.getElementById("pUyari").value=S.rates.uyari;
-  document.getElementById("pSum").textContent="Toplam "+(S.rates.iht+S.rates.ist+S.rates.tas)+"% — 100 olmalı.";
-  document.getElementById("catTable").innerHTML=`<table><tr><th>Kategori</th><th>Grup</th><th>Aylık plan</th></tr>${
-    S.cats.map((c,i)=>`<tr><td>${c.ad}</td><td>${c.grup}</td>
-      <td><input type="number" value="${c.plan}" onchange="S.cats[${i}].plan=+this.value;save();render()"></td></tr>`).join("")
-  }</table>`;
-}
-function saveRates(){
-  S.rates.iht=+document.getElementById("pIht").value;
-  S.rates.ist=+document.getElementById("pIst").value;
-  S.rates.tas=+document.getElementById("pTas").value;
-  S.rates.uyari=+document.getElementById("pUyari").value;
-  save(); render();
-}
-function setPin(){
-  const p=document.getElementById("newPin").value;
-  S.pin=p?hash(p):null; save();
-  alert(p?"PIN kaydedildi. Sonraki açılışta sorulur.":"PIN kaldırıldı.");
-}
-function unlock(){
-  const p=document.getElementById("pinIn").value;
-  if(S.pin && hash(p)!==S.pin){document.getElementById("pinErr").textContent="Yanlış PIN";return}
-  sessionStorage.setItem("pars_butce_ok","1");
-  document.getElementById("lock").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-}
-function exportJson(){
-  const blob=new Blob([JSON.stringify(S,null,2)],{type:"application/json"});
+function sil(id){rows=rows.filter(r=>r.id!==id); save(); ciz()}
+function temizle(){if(confirm("Hepsi silinsin mi?")){rows=[]; save(); ciz()}}
+function yedekle(){
   const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob); a.download="butce-yedek.json"; a.click();
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(rows,null,2)],{type:"application/json"}));
+  a.download="denge.json"; a.click();
 }
-function importJson(e){
+function yukle(e){
   const f=e.target.files[0]; if(!f) return;
   const r=new FileReader();
-  r.onload=()=>{try{S=JSON.parse(r.result);save();fillSelects();render();alert("Yedek yüklendi")}catch(err){alert("Dosya okunamadı")}};
+  r.onload=()=>{try{rows=JSON.parse(r.result)||[]; save(); ciz()}catch(err){alert("Dosya okunamadi")}};
   r.readAsText(f);
 }
-function wipe(){if(confirm("Tüm bütçe verisi silinsin mi?")){S=blank();save();fillSelects();render()}}
-function seedSample(){
-  if(!confirm("Örnek Eylül verisi mevcut kayıtların üstüne eklensin mi?")) return;
-  S.year=2026; S.month=9;
-  const add=(date,kind,cat,amt,note)=>S.txs.push({id:uid(),date,kind,cat,amt,pay:"Banka",note});
-  add("2026-09-01","gelir","Maaş",50000,"Maaş");
-  add("2026-09-10","gelir","Serbest / freelance",4500,"");
-  add("2026-09-20","gelir","Ek gelir / prim",1000,"");
-  add("2026-09-01","gider","Kira / konut kredisi",18000,"");
-  add("2026-09-02","gider","Aidat + site",1500,"");
-  add("2026-09-03","gider","Market / gıda",2850,"");
-  add("2026-09-05","gider","Elektrik",980,"");
-  add("2026-09-05","gider","Su",240,"");
-  add("2026-09-05","gider","Doğalgaz",620,"");
-  add("2026-09-05","gider","İnternet + telefon",749,"");
-  add("2026-09-06","gider","Sigorta",1200,"");
-  add("2026-09-07","gider","Market / gıda",1940,"");
-  add("2026-09-09","gider","Ulaşım + yakıt",2170,"");
-  add("2026-09-12","gider","Borç asgari ödeme",3000,"");
-  add("2026-09-16","gider","Market / gıda",2210,"");
-  add("2026-09-22","gider","Dışarıda yeme-içme",2105,"");
-  add("2026-09-25","gider","Acil durum fonu",4000,"virman");
-  add("2026-09-25","gider","Yatırım / BES",3000,"");
-  add("2026-09-25","gider","Hedef birikim",2000,"");
-  add("2026-09-26","gider","Ekstra borç anaparası",1000,"");
-  if(!S.goals.length){
-    S.goals.push({id:uid(),ad:"Acil durum fonu (3 ay)",hedef:90000,biriken:28000,tarih:"2027-06-01"});
-    S.goals.push({id:uid(),ad:"Ege tatili",hedef:40000,biriken:8000,tarih:"2027-07-01"});
-  }
-  save(); fillSelects(); render();
+function sum(tur){return rows.filter(r=>r.tur===tur).reduce((s,r)=>s+r.tutar,0)}
+function ciz(){
+  const k=sum("kazanc"), h=sum("harcama"), b=sum("borc"), d=k-h-b;
+  const el=document.getElementById("denge");
+  el.textContent=tl(d);
+  el.style.color=d>=0?"var(--green)":"var(--red)";
+  document.getElementById("durum").textContent=d>=0?"Artida.":"Eksidesin — harcamayi kis veya kazanci artir.";
+  document.getElementById("kKazanc").textContent=tl(k);
+  document.getElementById("kHarcama").textContent=tl(h);
+  document.getElementById("kBorc").textContent=tl(b);
+  const ad={kazanc:"Kazanc",harcama:"Harcama",borc:"Borc"};
+  document.getElementById("liste").innerHTML=rows.map(r=>`
+    <li>
+      <div><b>${r.ad}</b><small>${ad[r.tur]} · ${r.tarih}</small></div>
+      <div>
+        <span class="amt" style="color:${r.tur==="kazanc"?"var(--green)":"var(--red)"}">${r.tur==="kazanc"?"+":"\u2212"}${tl(r.tutar)}</span>
+        <button class="x" onclick="sil('${r.id}')">\u00d7</button>
+      </div>
+    </li>`).join("")||`<li style="color:var(--muted)">Henuz kayit yok.</li>`;
 }
-
-function render(){
-  renderDash(); renderTx(); renderBud(); renderGoals(); renderDebts(); renderSet();
-}
-document.querySelectorAll("nav button").forEach(b=>{
-  b.onclick=()=>{
-    document.querySelectorAll("nav button").forEach(x=>x.classList.remove("on"));
-    b.classList.add("on");
-    ["dash","tx","bud","goal","debt","set"].forEach(v=>{
-      document.getElementById("v-"+v).classList.toggle("hidden", b.dataset.v!==v);
-    });
-  };
-});
-
-(function init(){
-  if(S.pin && sessionStorage.getItem("pars_butce_ok")!=="1"){
-    document.getElementById("app").classList.add("hidden");
-    document.getElementById("lock").classList.remove("hidden");
-  }
-  fillSelects(); render();
-})();
+ciz();
 </script>
 </body>
 </html>
