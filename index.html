@@ -9,7 +9,6 @@
 :root{
   --bg:#07111f; --panel:#0d1a2b; --line:#1d3048;
   --text:#eef5ff; --muted:#91a4ba; --green:#2bd576; --red:#ff6174;
-  --gold:#f4c95d; --blue:#4da3ff;
 }
 *{box-sizing:border-box}
 body{
@@ -19,34 +18,26 @@ body{
   min-height:100vh;
 }
 .wrap{width:min(720px,calc(100% - 28px)); margin:auto; padding:28px 0 60px}
-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:22px}
+header{display:flex; justify-content:space-between; align-items:center; margin-bottom:22px; gap:12px; flex-wrap:wrap}
 .brand{display:flex; gap:12px; align-items:center}
-.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
-  background:linear-gradient(145deg,#18385a,#0c2139);font-size:22px}
+.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#18385a,#0c2139);font-size:22px}
 h1{margin:0;font-size:18px}
 .sub{color:var(--muted);font-size:12px;margin-top:2px}
-.hero{text-align:center; padding:28px 16px 22px; border:1px solid var(--line);
-  border-radius:20px; background:linear-gradient(180deg,#102033,#0d1a2b)}
+.hero{text-align:center; padding:28px 16px 22px; border:1px solid var(--line); border-radius:20px; background:linear-gradient(180deg,#102033,#0d1a2b)}
 .hero span{color:var(--muted); font-size:12px; letter-spacing:.4px; font-weight:600}
-.hero strong{display:block; font-size:clamp(36px,8vw,56px); font-weight:800; margin:6px 0;
-  font-variant-numeric:tabular-nums}
+.hero strong{display:block; font-size:clamp(36px,8vw,56px); font-weight:800; margin:6px 0; font-variant-numeric:tabular-nums}
 .hero p{margin:0; color:var(--muted); font-size:13px}
 .kpis{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:14px 0 18px}
 .kpi{border:1px solid var(--line); border-radius:14px; padding:12px; background:#0d1a2b}
 .kpi b{display:block; font-size:11px; color:var(--muted); font-weight:600}
-.kpi i{display:block; font-style:normal; font-size:18px; font-weight:800; margin-top:4px;
-  font-variant-numeric:tabular-nums}
+.kpi i{display:block; font-style:normal; font-size:18px; font-weight:800; margin-top:4px; font-variant-numeric:tabular-nums}
 form{display:grid; grid-template-columns:1fr 1fr 1.4fr auto; gap:8px; margin-bottom:16px}
-input,select,button{
-  background:#101f33; border:1px solid var(--line); color:var(--text);
-  border-radius:12px; padding:11px 12px; font-size:14px; font-family:inherit
-}
+input,select,button{background:#101f33; border:1px solid var(--line); color:var(--text); border-radius:12px; padding:11px 12px; font-size:14px; font-family:inherit}
 button{cursor:pointer; font-weight:700}
 .ok{background:#123a28; border-color:#1e6a46; color:var(--green)}
 .ghost{color:var(--muted)}
 ul{list-style:none; padding:0; margin:0}
-li{display:flex; justify-content:space-between; gap:10px; align-items:center;
-  border-bottom:1px solid rgba(29,48,72,.7); padding:10px 2px; font-size:14px}
+li{display:flex; justify-content:space-between; gap:10px; align-items:center; border-bottom:1px solid rgba(29,48,72,.7); padding:10px 2px; font-size:14px}
 li small{display:block; color:var(--muted); font-size:11px}
 .amt{font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap}
 .x{background:transparent; border:0; color:var(--muted); cursor:pointer; font-size:16px}
@@ -67,98 +58,70 @@ li small{display:block; color:var(--muted); font-size:11px}
       <div class="logo">₺</div>
       <div>
         <h1>DENGE</h1>
-        <div class="sub">Kazanc − harcama − borc</div>
+        <div class="sub">Kazanç − harcama − borç</div>
       </div>
     </div>
     <div class="tools">
-      <button class="ghost" onclick="yedekle()">Yedekle</button>
-      <button class="ghost" onclick="document.getElementById('imp').click()">Yukle</button>
+      <button class="ghost" type="button" onclick="yedekle()">Yedekle</button>
+      <button class="ghost" type="button" onclick="document.getElementById('imp').click()">Yükle</button>
       <input id="imp" class="hidden" type="file" accept="application/json" onchange="yukle(event)">
     </div>
   </header>
-
   <div class="hero">
-    <span>ELINDE KALAN</span>
+    <span>ELİNDE KALAN</span>
     <strong id="denge">0 ₺</strong>
-    <p id="durum">Kazanc ve harcama gir, dengeyi gor.</p>
+    <p id="durum">Kazanç ve harcama gir, dengeyi gör.</p>
   </div>
-
   <div class="kpis">
-    <div class="kpi"><b>KAZANC</b><i id="kKazanc">0 ₺</i></div>
+    <div class="kpi"><b>KAZANÇ</b><i id="kKazanc">0 ₺</i></div>
     <div class="kpi"><b>HARCAMA</b><i id="kHarcama">0 ₺</i></div>
-    <div class="kpi"><b>BORC</b><i id="kBorc">0 ₺</i></div>
+    <div class="kpi"><b>BORÇ</b><i id="kBorc">0 ₺</i></div>
   </div>
-
   <form onsubmit="ekle(event)">
     <select id="tur">
-      <option value="kazanc">Kazanc</option>
+      <option value="kazanc">Kazanç</option>
       <option value="harcama">Harcama</option>
-      <option value="borc">Borc</option>
+      <option value="borc">Borç</option>
     </select>
-    <input id="tutar" type="number" min="0" step="0.01" placeholder="Tutar" required>
-    <input id="ad" placeholder="Ne?  ornek: maas, kira, kart">
+    <input id="tutar" type="number" min="0" step="0.01" placeholder="Tutar ₺" required>
+    <input id="ad" placeholder="Ne?  örn. maaş, kira, kart">
     <button class="ok" type="submit">Ekle</button>
   </form>
-
   <ul id="liste"></ul>
   <div class="tools">
-    <button class="ghost" onclick="temizle()">Tumunu sil</button>
+    <button class="ghost" type="button" onclick="temizle()">Tümünü sil</button>
   </div>
 </div>
-
 <script>
 const KEY="pars_denge_v1";
 let rows=JSON.parse(localStorage.getItem(KEY)||"[]");
 const tl=n=>(Number(n)||0).toLocaleString("tr-TR",{maximumFractionDigits:0})+" ₺";
 const save=()=>localStorage.setItem(KEY,JSON.stringify(rows));
-
 function ekle(e){
   e.preventDefault();
   const tutar=+document.getElementById("tutar").value;
   if(!tutar) return;
-  rows.unshift({
-    id:Date.now().toString(36),
-    tur:document.getElementById("tur").value,
-    tutar,
-    ad:document.getElementById("ad").value.trim()||"—",
-    tarih:new Date().toLocaleDateString("tr-TR")
-  });
+  rows.unshift({id:Date.now().toString(36), tur:document.getElementById("tur").value, tutar, ad:document.getElementById("ad").value.trim()||"—", tarih:new Date().toLocaleDateString("tr-TR")});
   document.getElementById("tutar").value="";
   document.getElementById("ad").value="";
   save(); ciz();
 }
 function sil(id){rows=rows.filter(r=>r.id!==id); save(); ciz()}
 function temizle(){if(confirm("Hepsi silinsin mi?")){rows=[]; save(); ciz()}}
-function yedekle(){
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(new Blob([JSON.stringify(rows,null,2)],{type:"application/json"}));
-  a.download="denge.json"; a.click();
-}
-function yukle(e){
-  const f=e.target.files[0]; if(!f) return;
-  const r=new FileReader();
-  r.onload=()=>{try{rows=JSON.parse(r.result)||[]; save(); ciz()}catch(err){alert("Dosya okunamadi")}};
-  r.readAsText(f);
-}
+function yedekle(){const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(rows,null,2)],{type:"application/json"})); a.download="denge.json"; a.click();}
+function yukle(e){const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{try{rows=JSON.parse(r.result)||[]; save(); ciz()}catch(err){alert("Dosya okunamadı")}}; r.readAsText(f);}
 function sum(tur){return rows.filter(r=>r.tur===tur).reduce((s,r)=>s+r.tutar,0)}
 function ciz(){
   const k=sum("kazanc"), h=sum("harcama"), b=sum("borc"), d=k-h-b;
   const el=document.getElementById("denge");
   el.textContent=tl(d);
   el.style.color=d>=0?"var(--green)":"var(--red)";
-  document.getElementById("durum").textContent=d>=0?"Artida.":"Eksidesin — harcamayi kis veya kazanci artir.";
+  document.getElementById("durum").textContent=d>=0?"Artıda.":"Eksidesin — harcamayı kıs veya kazancı artır.";
   document.getElementById("kKazanc").textContent=tl(k);
   document.getElementById("kHarcama").textContent=tl(h);
   document.getElementById("kBorc").textContent=tl(b);
-  const ad={kazanc:"Kazanc",harcama:"Harcama",borc:"Borc"};
-  document.getElementById("liste").innerHTML=rows.map(r=>`
-    <li>
-      <div><b>${r.ad}</b><small>${ad[r.tur]} · ${r.tarih}</small></div>
-      <div>
-        <span class="amt" style="color:${r.tur==="kazanc"?"var(--green)":"var(--red)"}">${r.tur==="kazanc"?"+":"\u2212"}${tl(r.tutar)}</span>
-        <button class="x" onclick="sil('${r.id}')">\u00d7</button>
-      </div>
-    </li>`).join("")||`<li style="color:var(--muted)">Henuz kayit yok.</li>`;
+  const ad={kazanc:"Kazanç",harcama:"Harcama",borc:"Borç"};
+  document.getElementById("liste").innerHTML=rows.map(r=>`<li><div><b>${r.ad}</b><small>${ad[r.tur]} · ${r.tarih}</small></div><div><span class="amt" style="color:${r.tur==="kazanc"?"var(--green)":"var(--red)"}">${r.tur==="kazanc"?"+":"-"}${tl(r.tutar)}</span> <button class="x" type="button" onclick="sil('${r.id}')">x</button></div></li>`).join("")||`<li style="color:var(--muted)">Henüz kayıt yok.</li>`;
 }
 ciz();
 </script>
